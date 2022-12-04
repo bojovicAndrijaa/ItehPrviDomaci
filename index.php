@@ -59,12 +59,15 @@
     </nav>
 
     <div style="height: 50px"></div>
-    <img src ="img/kyle-wagner-7dpHzA7rb8-unsplash.jpg">
+
+    <!-- <img src ="pozadina.jpg"> -->
+    
+    
     <!-- Page Content -->
     <div class="container">
 
         <div style="height: 50px"></div>
-        <div class="card border border-1 rounded-5 shadow my-5" style="background-color: wheat">
+        <div class="card  shadow my-5" style="background-color: grey">
             <div class="card-body p-4 ">
                 <div style="height: 20px"></div>
                 <h1 class="fw-bolder position-absolute start-50 translate-middle">

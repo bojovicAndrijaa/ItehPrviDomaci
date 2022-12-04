@@ -1,8 +1,9 @@
 body {
     
-    background: url("https://unsplash.com/photos/7dpHzyA7rb8") no-repeat center center fixed;
+    background: url("pozadina.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
 }
+
