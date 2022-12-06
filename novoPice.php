@@ -1,3 +1,7 @@
+<?php include_once('dbBroker.php') ?>
+<?php include_once('model/Pice.php') ?>
+<?php include_once('model/Proizvodjac.php') ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -64,6 +68,7 @@
     
     
     <!-- Page Content -->
+    
     <div class="container">
 
         <div style="height: 50px"></div>
@@ -71,26 +76,53 @@
             <div class="card-body p-4 ">
                 <div style="height: 20px"></div>
                 <h1 class="fw-bolder position-absolute start-50 translate-middle">
-                    Drink store</h1>
+                    Dodaj pice</h1>
                 <div style="height: 30px"></div>
-                <p class="lead fw-semibold position-absolute top-50 start-50 translate-middle "
-                    style="text-align: center">Dobro došli na sajt za
-                    kupovinu pica. <br /> Ulaskom na stranicu 'Pića' možete pristupiti svim dostupnim
-                    pićima u našoj ponudi. Na stranici 'Prodavnice' se nalaze sve prodavnice za koje možete poručiti pića. Klikom
-                    na
-                    stranicu 'Nabavka pića' možete videti sve narudzbine. </br> U delu 'Dodaj' se mogu dodati nova
-                    pića, prodavnice, ali takođe i izvršiti nova porudžbina. </p>
-                <div style="height: 120px"></div>
-                <br /><br /><br /><br /><br /><br /><br /><br />
-                <p class="lead mb-0 fw-normal position-absolute start-50 translate-middle" style="text-align: center">
-                    Informacije:
-                    ab20190410@student.fon.bg.ac.rs<br />Kontakt telefon:
-                    +381641281999</p>
-                <br /><br />
-
+                <form method="post">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Naziv</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" name="naziv"
+                            placeholder="Naziv pica">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Godina proizvodnje</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" name="godinaProizvodnje"
+                            placeholder="Godina proizvodnje pica">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Cena</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Cena pica"
+                            name="cena">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Proizvodjac</label>
+                        <select class="form-control" name="proizvodjac">
+                            <?php
+                            $rez = Proizvodjac::getAll($link);
+                            while ($proizvodjac = mysqli_fetch_array($rez)) {
+                                $proizvodjacId = $proizvodjac['proizvodjacId'];
+                                $nazivFirme = $proizvodjac['Naziv'];
+                            ?>
+                            <option value="<?php echo $proizvodjacId?>">
+                                <?php echo $nazivFirme?>
+                            </option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div style="height: 45px"></div>
+                    <div class="form-group position-absolute start-50 translate-middle">
+                            <button type="submit" name="unesiPice">Dodaj pice</button>
+                    </div>
+                </form>
+                <br /><br /><br />
+                
             </div>
         </div>
     </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
@@ -98,3 +130,17 @@
 </body>
 
 </html>
+<?php
+
+//  dodavanje pica u bazu
+if (isset($_POST['unesiPice'])) {
+    if ($_POST['naziv'] !== "" && $_POST['godinaProizvodnje'] !== "" && $_POST['cena'] !== "" && $_POST['proizvodjac'] !== "") {
+        $pice = new Pice($_POST['naziv'], $_POST['godinaProizvodnje'], $_POST['cena'], $_POST['proizvodjac']);
+        if (!$pice->postojiLi($link))
+            $pice->addNew($link);
+        else
+            echo "Pice vec postoji u bazi!";
+    }
+}
+
+?>

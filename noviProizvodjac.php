@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<?php include_once('dbBroker.php') ?>
+<?php include_once('model/Proizvodjac.php') ?>
 
 <head>
     <meta charset="utf-8">
@@ -60,41 +60,58 @@
 
     <div style="height: 50px"></div>
 
-    <!-- <img src ="pozadina.jpg"> -->
-    
-    
-    <!-- Page Content -->
-    <div class="container">
+      <!-- Page Content -->
+      <div class="container">
 
-        <div style="height: 50px"></div>
-        <div class="card  shadow my-5" style="background-color: grey">
-            <div class="card-body p-4 ">
-                <div style="height: 20px"></div>
-                <h1 class="fw-bolder position-absolute start-50 translate-middle">
-                    Drink store</h1>
-                <div style="height: 30px"></div>
-                <p class="lead fw-semibold position-absolute top-50 start-50 translate-middle "
-                    style="text-align: center">Dobro došli na sajt za
-                    kupovinu pica. <br /> Ulaskom na stranicu 'Pića' možete pristupiti svim dostupnim
-                    pićima u našoj ponudi. Na stranici 'Prodavnice' se nalaze sve prodavnice za koje možete poručiti pića. Klikom
-                    na
-                    stranicu 'Nabavka pića' možete videti sve narudzbine. </br> U delu 'Dodaj' se mogu dodati nova
-                    pića, prodavnice, ali takođe i izvršiti nova porudžbina. </p>
-                <div style="height: 120px"></div>
-                <br /><br /><br /><br /><br /><br /><br /><br />
-                <p class="lead mb-0 fw-normal position-absolute start-50 translate-middle" style="text-align: center">
-                    Informacije:
-                    ab20190410@student.fon.bg.ac.rs<br />Kontakt telefon:
-                    +381641281999</p>
-                <br /><br />
+    <div style="height: 50px"></div>
+    <div class="card  shadow my-5" style="background-color: grey">
+        <div class="card-body p-4 ">
+            <div style="height: 20px"></div>
+            <h1 class="fw-bolder position-absolute start-50 translate-middle">
+                Dodaj proizvodjaca</h1>
+            <div style="height: 30px"></div>
+            <form method="post">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Naziv</label>
+                    <input type="text" name="naziv" class="form-control" id="formGroupExampleInput"
+                    placeholder="Naziv">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Drzava</label>
+                    <input type="text" name="drzava" class="form-control" id="formGroupExampleInput2"
+                    placeholder="Drzava">
+                </div>
+                <div style="height: 45px"></div>
+                <div class="form-group position-absolute start-50 translate-middle">
+                    <button type="submit" name="unesiProizvodjaca">Dodaj proizvodjaca</button>
+                </div>
+        </form>
+        
 
-            </div>
-        </div>
     </div>
+</div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 </body>
 
 </html>
+
+<?php
+
+//  dodavanje pisca u bazu
+if (isset($_POST['unesiProizvodjaca'])) {
+    if ($_POST['naziv'] !== "" && $_POST['drzava'] !== "") {
+        $proizvodjac = new Proizvodjac($_POST['naziv'], $_POST['drzava']);
+        //provera da li postoji u bazi
+        if (!$proizvodjac->postojiLi($link)) {
+            $proizvodjac->addNew($link);
+        } else {
+            echo "Proizvodjac vec postoji u bazi!";
+        }
+    }
+}
+
+?>

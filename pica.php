@@ -74,12 +74,8 @@
                     Drink store</h1>
                 <div style="height: 30px"></div>
                 <p class="lead fw-semibold position-absolute top-50 start-50 translate-middle "
-                    style="text-align: center">Dobro došli na sajt za
-                    kupovinu pica. <br /> Ulaskom na stranicu 'Pića' možete pristupiti svim dostupnim
-                    pićima u našoj ponudi. Na stranici 'Prodavnice' se nalaze sve prodavnice za koje možete poručiti pića. Klikom
-                    na
-                    stranicu 'Nabavka pića' možete videti sve narudzbine. </br> U delu 'Dodaj' se mogu dodati nova
-                    pića, prodavnice, ali takođe i izvršiti nova porudžbina. </p>
+                    style="text-align: center">Dobro došli na stranicu Pica
+                    <br />  </p>
                 <div style="height: 120px"></div>
                 <br /><br /><br /><br /><br /><br /><br /><br />
                 <p class="lead mb-0 fw-normal position-absolute start-50 translate-middle" style="text-align: center">
