@@ -48,7 +48,7 @@ class Pice
         }
     }
 
-    public function deleteById($baza, $PiceID)
+    public static function deleteById($baza, $PiceID)
     {
         $sqlUpit = "DELETE FROM pice WHERE PiceID = $PiceID";
         $rez = mysqli_query($baza, $sqlUpit);

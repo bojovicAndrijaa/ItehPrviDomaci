@@ -72,20 +72,22 @@ if ($result->num_rows == 0) {
             </div>
         </div>
     </nav>
-    
-    <!-- Page Content -->
-    
 
+
+    <!-- Page Content -->
     <div class="container">
-            <div style="height: 50px"></div>
-            <div class="card  shadow my-5" style="background-color: grey">
+<div class="row">
+
+  <div class="col-sm-8"> 
+  <div style="height: 50px">
+  <div class="card  shadow my-5" style="background-color: grey">
                 <div class="card-body p-4 ">
                     <div style="height: 20px"></div>
                     <h1 class="fw-bolder position-absolute start-50 translate-middle">
                         Pica
                     </h1>
-                    <div style="height: 30px"></div>
-                    <div style="height: 120px"></div>
+                    <br> <br>
+                    <div style="height: 120px">
                     <div class="col-md-8" style="text-align:center; width:99.9%;float:left">
                         <div class="tabela">
                             <table class="table table-striped table-dark">
@@ -116,12 +118,71 @@ if ($result->num_rows == 0) {
                     </div>
                 </div>
             </div>
-     </div>
+             
+            </div>
+        </div>
+        
+  </div>
+  <div class="col-sm-4">
+  <div style="height: 50px">
+        <div class="card  shadow my-5" style="background-color: grey">
+            
+            <div class="card-body p-4 ">
+                <div style="height: 120px">
+                <form method="post">
+
+                            <select class="form-control" name="selectPice">
+
+                            <?php
+                            $rez = Pice::getAll($link);
+                            while ($pice = mysqli_fetch_array($rez)) {
+                                $piceId = $pice['piceId'];
+                                $naziv=$pice['naziv'];
+                            ?>
+                            <option value="<?php echo $piceId ?>">
+                                <?php echo $naziv?>
+                            </option>
+                            <?php
+                            }
+                            ?>
+                            </select>
+                            <br>
+                            <div class="divDugme">
+                                <button type="submit" name="delete" class=" btn btn-dark">Izbrisi pice</button>
+                                <br />
+                            </div>
+                        </div>
+                        
+                        <br />
+                        
+                    </form>
+                   
+                    </div>
+
+            </div>
+             
+
+            </div>
+        </div>
+  </div>
+</div>
+</div>  
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>
+
+<?php
+
+if (isset($_POST['delete'])) {
+    $vrednost = $_POST['selectPice'];
+    Pice::deleteById($link, $vrednost);
+}
+
+?>

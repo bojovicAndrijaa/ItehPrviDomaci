@@ -45,6 +45,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="novoPice.php">Novo piće</a></li>
                             <li><a class="dropdown-item" href="noviProizvodjac.php">Novi proizvodjač</a></li>
+                            <li><a class="dropdown-item" href="obrisiPice.php">Obrisi pice</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -66,7 +67,7 @@
     
     
     <!-- Page Content -->
-    
+        
     <div class="container">
 
         <div style="height: 50px"></div>

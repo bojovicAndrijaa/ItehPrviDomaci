@@ -1,3 +1,19 @@
+<?php
+
+require "dbBroker.php";
+require "model/proizvodjac.php";
+session_start();
+$result = Proizvodjac::getAll($link);
+if (!$result) {
+    echo "Greska kod upita<br>";
+    die();
+}
+if ($result->num_rows == 0) {
+    echo "Nema proizvodjaca";
+    die();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -41,6 +57,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="novoPice.php">Novo piće</a></li>
                             <li><a class="dropdown-item" href="noviProizvodjac.php">Novi proizvodjač</a></li>
+                            <li><a class="dropdown-item" href="obrisiPice.php">Obrisi pice</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -69,12 +86,35 @@
             <div class="card-body p-4 ">
                 <div style="height: 20px"></div>
                 <h1 class="fw-bolder position-absolute start-50 translate-middle">
-                    Drink store</h1>
+                    Proizvodjaci</h1>
                 <div style="height: 30px"></div>
-                <p class="lead fw-semibold position-absolute top-50 start-50 translate-middle "
-                    style="text-align: center">Dobro došli na stranicu proizvodjaca
-                     <br />  </p>
+                
                 <div style="height: 120px"></div>
+                <table class="table table-striped table-dark">
+
+ 
+                            <thead>
+                                <tr>
+                                    
+                                    <th scope="col">ProizvodjacID</th>
+                                    <th scope="col">Naziv proizvodjaca</th>
+                                    <th scope="col">Drzava porekla</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                while ($red = $result->fetch_array()) {
+                                ?>
+                                    <tr id="tr-">
+                                        <td><?php echo $red["proizvodjacId"] ?></td>
+                                        <td><?php echo $red["Naziv"] ?></td>
+                                        <td><?php echo $red["Drzava"] ?></td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                 <br /><br /><br /><br /><br /><br /><br /><br />
                 <p class="lead mb-0 fw-normal position-absolute start-50 translate-middle" style="text-align: center">
                     Informacije:
